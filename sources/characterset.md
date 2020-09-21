@@ -1,13 +1,15 @@
 ## Sequence of characers in Carruba 1978 (identical to sequence in TAM)
 
+For characters we have deciphered, transcription values are **highlighted like this**.  Note that the transcription scheme is *case sensitive*.
 
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.7905,0.03518,0.01979,0.1759&wID=50&CVT=JPEG),![Wunjo 2](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.5857,0.3210,0.07857,0.1439&wID=50&CVT=JPEG)
+
+1. **e** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.7905,0.03518,0.01979,0.1759&wID=50&CVT=JPEG),![Wunjo 2](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.5857,0.3210,0.07857,0.1439&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0004.tif&RGN=0.03977,0.04392,0.05712,0.1303&wID=50&CVT=JPEG)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.07845,0.07705,0.01873,0.1625&wID=30&CVT=JPEG)
+1. **b** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.07845,0.07705,0.01873,0.1625&wID=30&CVT=JPEG)
 1. ![W with a Hook](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.6690,0.1771,0.1690,0.1218&wID=50&CVT=JPEG)
 1. "Gamma"
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.6848,0.2446,0.02933,0.1441&wID=50&CVT=JPEG)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.1173,0.2898,0.02261,0.1524&wID=50&CVT=JPEG)
+1. **d** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.6848,0.2446,0.02933,0.1441&wID=50&CVT=JPEG)
+1. **i** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.1173,0.2898,0.02261,0.1524&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.5238,0.3210,0.06190,0.1328&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0034.tif&RGN=0.1828,0.2153,0.01774,0.2536&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0112.tif&RGN=0.3688,0.4943,0.03028,0.1625&wID=50&CVT=JPEG) ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0115.tif&RGN=0.6255,0.4610,0.04397,0.05600&wID=50&CVT=JPEG)
@@ -19,11 +21,11 @@
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.1947,0.07203,0.02367,0.1189&wID=50&CVT=JPEG) ![Nu 2](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.1571,0.6236,0.09524,0.1439&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0068.tif&RGN=0.08011,0.5152,0.02779,0.1991&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.1597,0.06365,0.02226,0.1508&wID=50&CVT=JPEG)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.3329,0.05863,0.02933,0.1642&wID=50&CVT=JPEG)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.3756,0.04523,0.02615,0.1692&wID=50&CVT=JPEG)
+1. **u** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.3329,0.05863,0.02933,0.1642&wID=50&CVT=JPEG)
+1. **p** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.3756,0.04523,0.02615,0.1692&wID=50&CVT=JPEG)
 1. diamond (velar)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.6876,0.04188,0.01943,0.1658&wID=50&CVT=JPEG)
-1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.02756,0.2965,0.02191,0.1491&wID=50&CVT=JPEG) ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.3286,0.4649,0.05000,0.1476&wID=50&CVT=JPEG)
+1. **r** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.6876,0.04188,0.01943,0.1658&wID=50&CVT=JPEG)
+1. **s** ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.02756,0.2965,0.02191,0.1491&wID=50&CVT=JPEG) ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0084.tif&RGN=0.3286,0.4649,0.05000,0.1476&wID=50&CVT=JPEG)
 1. ![](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.8208,0.05025,0.02792,0.1390&wID=50&CVT=JPEG)
 1. T
 1. ![Double V](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0020.tif&RGN=0.4141,0.05025,0.03251,0.1575&wID=50&CVT=JPEG) ![Double V 2](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0137.tif&RGN=0.2881,0.06430,0.02478,0.1818&wID=50&CVT=JPEG) ![Double V 3](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0054.tif&RGN=0.2206,0.5989,0.02371,0.1545&wID=50&CVT=JPEG) ![Double V 4](http://www.homermultitext.org/iipsrv?OBJ=IIP,1.0&FIF=/project/homer/pyramidal/deepzoom/lycian/hc/v1/2007.02.0054.tif&RGN=0.3691,0.5691,0.02729,0.1707&wID=50&CVT=JPEG)
