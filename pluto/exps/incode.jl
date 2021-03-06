@@ -1,6 +1,4 @@
-using VegaLite, VegaDatasets
 
-world110m = dataset("world-110m")
 us10m = dataset("us-10m")
 capitals = dataset("us-state-capitals")
 
