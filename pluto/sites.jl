@@ -33,14 +33,17 @@ md"## Plot Lycian sites interactively"
 # ╔═╡ ddef4c98-7e7d-11eb-162e-eb715aaba907
 md"*Customize projection*"
 
+# ╔═╡ 407e6992-7e84-11eb-148e-23f00a55f412
+md"Scale $(@bind scalefactor Slider(-500:4000, default=2000, show_value=true))"
+
 # ╔═╡ 10156f3c-7e7d-11eb-0e8b-83315a983280
-md"Yaw $(@bind rot1 Slider(-180:180, default=-35, show_value=true))"
+md"Yaw $(@bind rot1 Slider(-180:180, default=-40, show_value=true))"
 
 # ╔═╡ 5f895966-7e7d-11eb-1393-c9ae1d1db0a7
-md"Pitch $(@bind rot2 Slider(-180:180, default=0, show_value=true))"
+md"Pitch $(@bind rot2 Slider(-180:180, default=-38, show_value=true))"
 
 # ╔═╡ 66a5ad8a-7e7d-11eb-183b-3fd274a92798
-md"Roll $(@bind rot3 Slider(-180:180, default=0, show_value=true))"
+md"Roll $(@bind rot3 Slider(-180:180, default=20, show_value=true))"
 
 # ╔═╡ 15eb7c28-7e7d-11eb-331b-c16c9a1cfb34
 md"*Display size*"
@@ -107,7 +110,8 @@ function plotall(proj)
     @vlplot(
         projection={
 			type=proj,
-			rotate=[rot1,rot2,rot3]
+			rotate=[rot1,rot2,rot3],
+			scale=scalefactor
 		},
         mark={
             :geoshape,
@@ -123,10 +127,15 @@ function plotall(proj)
         }
     ) 	+
 	@vlplot(
+		 projection={
+			type=proj,
+			rotate=[rot1,rot2,rot3],
+			scale=scalefactor
+		},
 		mark={
             :geoshape,
             fill=:transparent,
-            stroke=:lightgray
+            stroke=:steelblue
         },
 			
         data={
@@ -139,6 +148,11 @@ function plotall(proj)
 	) +
 	@vlplot(
     :circle,
+	 projection={
+		type=proj,
+		rotate=[rot1,rot2,rot3],
+		scale=scalefactor
+	},
     data=lls,
     longitude="lon:q",
     latitude="lat:q",
@@ -218,9 +232,10 @@ plotgrat("Mercator")
 # ╟─b154a4ae-7e72-11eb-3239-517878a3a6fb
 # ╟─ddef4c98-7e7d-11eb-162e-eb715aaba907
 # ╟─a78c54ca-7e76-11eb-3fbd-6d09ca6d108f
+# ╟─407e6992-7e84-11eb-148e-23f00a55f412
 # ╟─10156f3c-7e7d-11eb-0e8b-83315a983280
-# ╟─5f895966-7e7d-11eb-1393-c9ae1d1db0a7
-# ╟─66a5ad8a-7e7d-11eb-183b-3fd274a92798
+# ╠═5f895966-7e7d-11eb-1393-c9ae1d1db0a7
+# ╠═66a5ad8a-7e7d-11eb-183b-3fd274a92798
 # ╟─15eb7c28-7e7d-11eb-331b-c16c9a1cfb34
 # ╟─e38ef14e-7e73-11eb-06a5-edd0f493edc2
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
