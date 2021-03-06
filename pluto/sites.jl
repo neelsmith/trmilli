@@ -98,6 +98,8 @@ world110m = dataset("world-110m")
 # ╔═╡ ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # Use interacitve values for:
 # rot1, rot2, rot3
+
+
 function plotall(proj)
 
 		
@@ -119,20 +121,36 @@ function plotall(proj)
                 feature=:land
             }
         }
-    ) + 
+    ) 	+
+	@vlplot(
+		mark={
+            :geoshape,
+            fill=:transparent,
+            stroke=:lightgray
+        },
+			
+        data={
+            values=grat,
+            format={
+                type=:topojson,
+                feature=:graticule
+            }
+        }
+	) +
 	@vlplot(
     :circle,
     data=lls,
     longitude="lon:q",
     latitude="lat:q",
-    color={value=:orange}
+    color={value=:orange} 
 )
 end
+
 
 # ╔═╡ b154a4ae-7e72-11eb-3239-517878a3a6fb
 if isempty(proj)
 	
-	plotall(:mercator)
+	plotall(:naturalEarth1)
 else
 	plotall(projdict[proj])
 end
@@ -146,6 +164,7 @@ function plotgrat(proj)
 	
 		
     @vlplot(width=w, height=h) +
+	
     @vlplot(
         projection={
 			type=proj,
@@ -153,9 +172,10 @@ function plotgrat(proj)
 		},
         mark={
             :geoshape,
-            fill=:white,
-            stroke=:black
+            fill=:transparent,
+            stroke=:gray
         },
+			
         data={
             values=grat,
             format={
@@ -169,10 +189,15 @@ function plotgrat(proj)
     data=lls,
     longitude="lon:q",
     latitude="lat:q",
-    color={value=:orange}
-) + 
+    color={value=:aliceblue}
+)  +
+	
 	@vlplot(
-		:geoshape,
+		 mark={
+            :geoshape,
+            fill=:transparent,
+            stroke=:red
+        },
 		data={
             values=world110m,
             format={
