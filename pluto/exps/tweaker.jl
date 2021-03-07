@@ -2,7 +2,7 @@
 
 projt = :naturalEarth1
 
-function plotgrat(rot1=-30, rot2=-37, rot3=0; proj = projt, w = 600, h = 300, scalefactor = 7200)
+function plotgrat(rot1=-30, rot2=-37, rot3=0; proj = projt, w = 900, h = 500, scalefactor = 9200)
 	
 		
     @vlplot(width=w, height=h) +

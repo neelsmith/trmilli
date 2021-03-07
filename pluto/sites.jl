@@ -34,13 +34,13 @@ md"## Plot Lycian sites interactively"
 md"*Customize projection*"
 
 # ╔═╡ 407e6992-7e84-11eb-148e-23f00a55f412
-md"Scale $(@bind scalefactor Slider(-500:4000, default=2000, show_value=true))"
+md"Scale $(@bind scalefactor Slider(-500:4000, default=4000, show_value=true))"
 
 # ╔═╡ 10156f3c-7e7d-11eb-0e8b-83315a983280
-md"Yaw $(@bind rot1 Slider(-180:180, default=-40, show_value=true))"
+md"Yaw $(@bind rot1 Slider(-180:180, default=-28, show_value=true))"
 
 # ╔═╡ 5f895966-7e7d-11eb-1393-c9ae1d1db0a7
-md"Pitch $(@bind rot2 Slider(-180:180, default=-38, show_value=true))"
+md"Pitch $(@bind rot2 Slider(-180:180, default=-37, show_value=true))"
 
 # ╔═╡ 66a5ad8a-7e7d-11eb-183b-3fd274a92798
 md"Roll $(@bind rot3 Slider(-180:180, default=20, show_value=true))"
@@ -95,15 +95,15 @@ lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 # ╔═╡ 3864465a-7e7f-11eb-11fb-a386ee27641e
 grat  = dataset("graticule")
 
-# ╔═╡ a5d80b70-7e72-11eb-364b-d54f4473e4e1
-world110m = dataset("world-110m")
-
 # ╔═╡ ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # Use interacitve values for:
 # rot1, rot2, rot3
 
 
 function plotall(proj)
+    land10mfile = repo * "/data/land-10m.json"
+    land10m = JSON.parsefile(land10mfile)
+    d=VegaDatasets.VegaJSONDataset(land10m,land10mfile)
 
 		
     @vlplot(width=w, height=h) +
@@ -119,7 +119,7 @@ function plotall(proj)
             stroke=:white
         },
         data={
-            values=world110m,
+            values=d,
             format={
                 type=:topojson,
                 feature=:land
@@ -168,6 +168,9 @@ if isempty(proj)
 else
 	plotall(projdict[proj])
 end
+
+# ╔═╡ a5d80b70-7e72-11eb-364b-d54f4473e4e1
+world110m = dataset("world-110m")
 
 # ╔═╡ c1ac17da-7e7f-11eb-2c34-f9df92a4caef
 grat.path
@@ -232,10 +235,10 @@ plotgrat("Mercator")
 # ╟─b154a4ae-7e72-11eb-3239-517878a3a6fb
 # ╟─ddef4c98-7e7d-11eb-162e-eb715aaba907
 # ╟─a78c54ca-7e76-11eb-3fbd-6d09ca6d108f
-# ╟─407e6992-7e84-11eb-148e-23f00a55f412
-# ╟─10156f3c-7e7d-11eb-0e8b-83315a983280
+# ╠═407e6992-7e84-11eb-148e-23f00a55f412
+# ╠═10156f3c-7e7d-11eb-0e8b-83315a983280
 # ╠═5f895966-7e7d-11eb-1393-c9ae1d1db0a7
-# ╠═66a5ad8a-7e7d-11eb-183b-3fd274a92798
+# ╟─66a5ad8a-7e7d-11eb-183b-3fd274a92798
 # ╟─15eb7c28-7e7d-11eb-331b-c16c9a1cfb34
 # ╟─e38ef14e-7e73-11eb-06a5-edd0f493edc2
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
@@ -246,8 +249,8 @@ plotgrat("Mercator")
 # ╟─48185b78-7e76-11eb-3755-e75f9d869a32
 # ╟─4db92e1e-7e73-11eb-1f5b-31c82d374367
 # ╟─6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
-# ╟─41241d02-7e74-11eb-083c-1b00e60e3985
-# ╟─3864465a-7e7f-11eb-11fb-a386ee27641e
+# ╠═41241d02-7e74-11eb-083c-1b00e60e3985
+# ╠═3864465a-7e7f-11eb-11fb-a386ee27641e
 # ╟─a5d80b70-7e72-11eb-364b-d54f4473e4e1
 # ╟─5ddd9878-7e7f-11eb-21c4-a3d3fab2cfc8
 # ╟─c1ac17da-7e7f-11eb-2c34-f9df92a4caef
