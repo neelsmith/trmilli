@@ -89,6 +89,9 @@ repo = dirname(pwd())
 lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 =2, delim="|") |> DataFrame
 
+# ╔═╡ 3864465a-7e7f-11eb-11fb-a386ee27641e
+grat  = dataset("graticule")
+
 # ╔═╡ ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # Use interacitve values for:
 # rot1, rot2, rot3
@@ -120,7 +123,7 @@ function plotall(proj)
                 feature=:land
             }
         }
-    ) 	+ #=
+    ) 	+
 	@vlplot(
 		 projection={
 			type=proj,
@@ -140,7 +143,7 @@ function plotall(proj)
                 feature=:graticule
             }
         }
-	) + =#
+	) +
 	@vlplot(
     :circle,
 	 projection={
@@ -164,6 +167,66 @@ else
 	plotall(projdict[proj])
 end
 
+# ╔═╡ a5d80b70-7e72-11eb-364b-d54f4473e4e1
+world110m = dataset("world-110m")
+
+# ╔═╡ c1ac17da-7e7f-11eb-2c34-f9df92a4caef
+grat.path
+
+
+# ╔═╡ 4ccac240-7e7f-11eb-3105-47f639d23364
+function plotgrat(proj)
+	
+		
+    @vlplot(width=w, height=h) +
+	
+    @vlplot(
+        projection={
+			type=proj,
+			rotate=[rot1,rot2,rot3]
+		},
+        mark={
+            :geoshape,
+            fill=:transparent,
+            stroke=:gray
+        },
+			
+        data={
+            values=grat,
+            format={
+                type=:topojson,
+                feature=:graticule
+            }
+        }
+    ) + 
+	@vlplot(
+    :circle,
+    data=lls,
+    longitude="lon:q",
+    latitude="lat:q",
+    color={value=:aliceblue}
+)  +
+	
+	@vlplot(
+		 mark={
+            :geoshape,
+            fill=:transparent,
+            stroke=:red
+        },
+		data={
+            values=world110m,
+            format={
+                type=:topojson,
+                feature=:land
+            }
+		}
+		)
+	
+end
+
+# ╔═╡ 5ddd9878-7e7f-11eb-21c4-a3d3fab2cfc8
+plotgrat("Mercator")
+
 # ╔═╡ Cell order:
 # ╟─68adcd48-7e72-11eb-3313-4be9accf9305
 # ╟─478229d4-7e72-11eb-27ec-47e443620d4c
@@ -178,9 +241,14 @@ end
 # ╟─e38ef14e-7e73-11eb-06a5-edd0f493edc2
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
 # ╟─768fd7b6-7e73-11eb-1826-d300c0ac0361
-# ╠═ae8aed3c-7e72-11eb-2004-3f41ad407fdd
+# ╟─ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # ╟─08287ce0-7e7a-11eb-159d-cb96c850b4f9
 # ╟─48185b78-7e76-11eb-3755-e75f9d869a32
 # ╟─4db92e1e-7e73-11eb-1f5b-31c82d374367
 # ╟─6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
-# ╟─41241d02-7e74-11eb-083c-1b00e60e3985
+# ╠═41241d02-7e74-11eb-083c-1b00e60e3985
+# ╠═3864465a-7e7f-11eb-11fb-a386ee27641e
+# ╠═a5d80b70-7e72-11eb-364b-d54f4473e4e1
+# ╟─5ddd9878-7e7f-11eb-21c4-a3d3fab2cfc8
+# ╟─c1ac17da-7e7f-11eb-2c34-f9df92a4caef
+# ╟─4ccac240-7e7f-11eb-3105-47f639d23364
