@@ -121,12 +121,7 @@ lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 # ╔═╡ ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # Use interacitve values for:
 # rot1, rot2, rot3
-
-
-function plotall(proj)
- 
-    
-		
+function plotall(proj) 		
     @vlplot(width=w, height=h) +
 	@vlplot(
 		 projection={
@@ -206,7 +201,7 @@ end
 # ╟─e38ef14e-7e73-11eb-06a5-edd0f493edc2
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
 # ╟─768fd7b6-7e73-11eb-1826-d300c0ac0361
-# ╠═ae8aed3c-7e72-11eb-2004-3f41ad407fdd
+# ╟─ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # ╟─08287ce0-7e7a-11eb-159d-cb96c850b4f9
 # ╟─48185b78-7e76-11eb-3755-e75f9d869a32
 # ╟─66a5ad8a-7e7d-11eb-183b-3fd274a92798
