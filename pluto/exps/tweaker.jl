@@ -58,6 +58,19 @@ function plotgrat(rot1=-30, rot2=-37, rot3=0; proj = projt, w = 900, h = 500, sc
         longitude="lon:q",
         latitude="lat:q",
         color={value=:orange}
-    ) 
+    )  +
+    @vlplot(
+        mark={
+            type=:text,
+            dy=-10
+        },
+        data=lls,
+        longitude="lon:q",
+        latitude="lat:q",
+        text={
+            field=:sitename,
+            type=:nominal
+        }
+    )
 	
 end
