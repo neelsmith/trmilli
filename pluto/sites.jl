@@ -133,8 +133,16 @@ function textlist()
 	namedf = @from inscr in ragetext begin
        @select {inscr.text}
        @collect DataFrame
- end
+ 	end
 	pushfirst!(namedf[:,:text], "")
+	menu = Pair{AbstractString, AbstractString}[]
+	for row in eachrow(namedf) 
+		urn = CtsUrn(row.text)
+		label = string(workcomponent(urn))#, " (", row.TLname,")")
+		pr = row.text => label
+		push!(menu, pr)
+	end
+	menu
 end
 
 # ╔═╡ 6a3c3c68-8286-11eb-3e64-ff1d63775a4b
@@ -251,11 +259,14 @@ else
 	plotall(projdict[proj])
 end
 
+# ╔═╡ d1c0a5fc-828d-11eb-2105-37471fe4b3d1
+textlist() 
+
 # ╔═╡ Cell order:
 # ╟─68adcd48-7e72-11eb-3313-4be9accf9305
 # ╟─478229d4-7e72-11eb-27ec-47e443620d4c
 # ╟─6a3c3c68-8286-11eb-3e64-ff1d63775a4b
-# ╟─b154a4ae-7e72-11eb-3239-517878a3a6fb
+# ╠═b154a4ae-7e72-11eb-3239-517878a3a6fb
 # ╟─7d9c436a-8057-11eb-270b-0164b9796a2e
 # ╟─ddef4c98-7e7d-11eb-162e-eb715aaba907
 # ╟─a78c54ca-7e76-11eb-3fbd-6d09ca6d108f
@@ -281,4 +292,5 @@ end
 # ╟─d6f542f6-828a-11eb-2c66-578edb80d4ee
 # ╟─007ddf44-828a-11eb-3afb-c75f982c1295
 # ╟─41241d02-7e74-11eb-083c-1b00e60e3985
-# ╟─015a2444-8286-11eb-09c1-033d3126a2f7
+# ╟─d1c0a5fc-828d-11eb-2105-37471fe4b3d1
+# ╠═015a2444-8286-11eb-09c1-033d3126a2f7
