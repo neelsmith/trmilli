@@ -21,6 +21,10 @@ lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 export lls
 
 
+textgeo = CSV.File(repo * "/data/onlinegeo.cex", skipto
+=2, delim="|") |> DataFrame
+
+
 
 #export viewglobal
 #export world110m, necountries, countries50m, land110m

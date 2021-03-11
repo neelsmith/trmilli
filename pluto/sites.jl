@@ -25,6 +25,7 @@ begin
 	using JSON
 	using PlutoUI
 	using Query
+	using CitableText
 	Pkg.status()
 end
 
@@ -94,9 +95,6 @@ md"Roll $(@bind rot3 Slider(-180:180, default=0, show_value=true))"
 # ╔═╡ 4db92e1e-7e73-11eb-1f5b-31c82d374367
 md"> Data sets"
 
-# ╔═╡ d93054fc-8285-11eb-31cb-3d10d4e42129
-
-
 # ╔═╡ 6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
 repo = dirname(pwd())
 
@@ -114,28 +112,40 @@ end
 # ╔═╡ 23479290-8055-11eb-3f25-7701cd558e3f
 grat  = dataset("graticule")
 
+# ╔═╡ 007ddf44-828a-11eb-3afb-c75f982c1295
+textgeo = begin
+	onlinetexts = CSV.File(repo * "/data/onlinegeo.cex", skipto
+=2, delim="|") |> DataFrame
+	onlinetexts |> dropmissing
+end
+
+
 # ╔═╡ 41241d02-7e74-11eb-083c-1b00e60e3985
 # Lon-lat coordiantes for sites identified by RAGE ID.
 lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 =2, delim="|") |> DataFrame
 
+# ╔═╡ d6f542f6-828a-11eb-2c66-578edb80d4ee
+ragetext = innerjoin(lls, textgeo, on = :rageid)
+
 # ╔═╡ 015a2444-8286-11eb-09c1-033d3126a2f7
-function sitelist()
-	namedf = @from site in lls begin
-       @select {site.sitename}
+function textlist()
+	namedf = @from inscr in ragetext begin
+       @select {inscr.text}
        @collect DataFrame
  end
-	pushfirst!(sort(namedf[:,:sitename]), "")
+	pushfirst!(namedf[:,:text], "")
 end
 
 # ╔═╡ 6a3c3c68-8286-11eb-3e64-ff1d63775a4b
-md"*Site* $(@bind sitechoice Select(sitelist()))"
+md"*Text* $(@bind textchoice Select(textlist()))"
 
 # ╔═╡ e2d46682-8286-11eb-1afc-cf239fa0a413
+# USED JOIED DATA
 overlay = begin
-	 @from site in lls begin
-        @where site.sitename == sitechoice
-        @select {site.sitename, site.lon, site.lat}
+	 @from t in ragetext begin
+        @where t.text == textchoice
+        @select {t.TLname, t.lon, t.lat}
         @collect DataFrame
     end
 end
@@ -226,7 +236,7 @@ function plotall(proj)
         latitude="lat:q",
 				size={value=18},
         text={
-            field=:sitename,
+            field=:TLname,
             type=:nominal
         }
     )
@@ -259,15 +269,16 @@ end
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
 # ╟─768fd7b6-7e73-11eb-1826-d300c0ac0361
 # ╠═ae8aed3c-7e72-11eb-2004-3f41ad407fdd
-# ╟─e2d46682-8286-11eb-1afc-cf239fa0a413
+# ╠═e2d46682-8286-11eb-1afc-cf239fa0a413
 # ╟─08287ce0-7e7a-11eb-159d-cb96c850b4f9
 # ╟─48185b78-7e76-11eb-3755-e75f9d869a32
 # ╟─66a5ad8a-7e7d-11eb-183b-3fd274a92798
 # ╟─4db92e1e-7e73-11eb-1f5b-31c82d374367
-# ╠═d93054fc-8285-11eb-31cb-3d10d4e42129
 # ╟─b755dcae-8059-11eb-0492-e11a2cf13d38
 # ╟─cf4b7292-8059-11eb-041f-b36239267c09
 # ╟─6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
 # ╟─23479290-8055-11eb-3f25-7701cd558e3f
+# ╟─d6f542f6-828a-11eb-2c66-578edb80d4ee
+# ╟─007ddf44-828a-11eb-3afb-c75f982c1295
 # ╟─41241d02-7e74-11eb-083c-1b00e60e3985
 # ╟─015a2444-8286-11eb-09c1-033d3126a2f7
