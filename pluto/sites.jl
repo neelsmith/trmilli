@@ -31,7 +31,7 @@ begin
 end
 
 # ╔═╡ 478229d4-7e72-11eb-27ec-47e443620d4c
-md"## Plot Lycian sites"
+md"## Locate Lycian texts"
 
 # ╔═╡ 7d8cbce0-82a7-11eb-0a34-e30af2350db2
 md"""Select a text to see its location on the map.
@@ -39,7 +39,14 @@ Follow links to full edition on Dane Scott's Trmilli site.
 """
 
 # ╔═╡ 768fd7b6-7e73-11eb-1826-d300c0ac0361
-md"> Functions to manipulate and plot data"
+md"""
+
+
+---
+
+> Functions to manipulate and plot data
+
+"""
 
 # ╔═╡ 4db92e1e-7e73-11eb-1f5b-31c82d374367
 md"> Data sets"
