@@ -24,6 +24,7 @@ begin
 	using DataFrames
 	using JSON
 	using PlutoUI
+	using Query
 	Pkg.status()
 end
 
@@ -37,16 +38,16 @@ md"> Customize map display"
 md"*Projection*"
 
 # ╔═╡ 772eba2e-8059-11eb-13d8-55ae56dd0534
-scalefactor = 20000
+scalefactor = 32000
 
 # ╔═╡ 407e6992-7e84-11eb-148e-23f00a55f412
 #md"*Zoom* **-**$(@bind scalefactor Slider(2000:9000, default=2000, show_value=true))**+**"
 
 # ╔═╡ 88d858ac-8059-11eb-3266-39be4ddbea99
-rot1 = -29.5
+rot1 = -29.6
 
 # ╔═╡ 8d09587c-8059-11eb-3d8b-1502b8fd0af1
-rot2 = -36.7
+rot2 = -36.6
 
 # ╔═╡ 10156f3c-7e7d-11eb-0e8b-83315a983280
 #md"""
@@ -59,7 +60,7 @@ rot2 = -36.7
 md"*Display size*"
 
 # ╔═╡ e38ef14e-7e73-11eb-06a5-edd0f493edc2
-md"Map height (pixels) $(@bind h Slider(100:800, default=500, show_value=true))"
+md"Map height (pixels) $(@bind h Slider(100:800, default=700, show_value=true))"
 
 # ╔═╡ a6ba406e-7e73-11eb-30ef-5bcccea7fd72
 md"Map width (pixels) $(@bind w Slider(100:800, default=900, show_value=true))"
@@ -93,6 +94,9 @@ md"Roll $(@bind rot3 Slider(-180:180, default=0, show_value=true))"
 # ╔═╡ 4db92e1e-7e73-11eb-1f5b-31c82d374367
 md"> Data sets"
 
+# ╔═╡ d93054fc-8285-11eb-31cb-3d10d4e42129
+
+
 # ╔═╡ 6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
 repo = dirname(pwd())
 
@@ -107,9 +111,6 @@ end
 
 	
 
-# ╔═╡ decc4fca-8059-11eb-3971-ab4d83398599
-data.data
-
 # ╔═╡ 23479290-8055-11eb-3f25-7701cd558e3f
 grat  = dataset("graticule")
 
@@ -117,6 +118,27 @@ grat  = dataset("graticule")
 # Lon-lat coordiantes for sites identified by RAGE ID.
 lls = CSV.File(repo * "/data/simple-lls.cex", skipto
 =2, delim="|") |> DataFrame
+
+# ╔═╡ 015a2444-8286-11eb-09c1-033d3126a2f7
+function sitelist()
+	namedf = @from site in lls begin
+       @select {site.sitename}
+       @collect DataFrame
+ end
+	pushfirst!(sort(namedf[:,:sitename]), "")
+end
+
+# ╔═╡ 6a3c3c68-8286-11eb-3e64-ff1d63775a4b
+md"*Site* $(@bind sitechoice Select(sitelist()))"
+
+# ╔═╡ e2d46682-8286-11eb-1afc-cf239fa0a413
+overlay = begin
+	 @from site in lls begin
+        @where site.sitename == sitechoice
+        @select {site.sitename, site.lon, site.lat}
+        @collect DataFrame
+    end
+end
 
 # ╔═╡ ae8aed3c-7e72-11eb-2004-3f41ad407fdd
 # Use interacitve values for:
@@ -172,8 +194,42 @@ function plotall(proj)
     data=lls,
     longitude="lon:q",
     latitude="lat:q",
+	size={value=50},
     color={value=:orange} 
-)
+) +
+    @vlplot(
+    :circle,
+	 projection={
+		type=proj,
+		rotate=[rot1,rot2,rot3],
+		scale=scalefactor
+	},
+    data=overlay,
+    longitude="lon:q",
+    latitude="lat:q",
+    size={value=20},
+    color={value=:steelblue} 
+    )   +
+    @vlplot(
+        mark={
+            type=:text,
+            dy=-10,
+            color=:steelblue
+        },
+        projection={
+            type=proj,
+            rotate=[rot1,rot2,rot3],
+            scale=scalefactor
+        },
+        data=overlay,
+        longitude="lon:q",
+        latitude="lat:q",
+				size={value=18},
+        text={
+            field=:sitename,
+            type=:nominal
+        }
+    )
 end
 
 
@@ -188,27 +244,30 @@ end
 # ╔═╡ Cell order:
 # ╟─68adcd48-7e72-11eb-3313-4be9accf9305
 # ╟─478229d4-7e72-11eb-27ec-47e443620d4c
+# ╟─6a3c3c68-8286-11eb-3e64-ff1d63775a4b
 # ╟─b154a4ae-7e72-11eb-3239-517878a3a6fb
 # ╟─7d9c436a-8057-11eb-270b-0164b9796a2e
 # ╟─ddef4c98-7e7d-11eb-162e-eb715aaba907
 # ╟─a78c54ca-7e76-11eb-3fbd-6d09ca6d108f
-# ╟─772eba2e-8059-11eb-13d8-55ae56dd0534
-# ╠═407e6992-7e84-11eb-148e-23f00a55f412
-# ╟─88d858ac-8059-11eb-3266-39be4ddbea99
-# ╟─8d09587c-8059-11eb-3d8b-1502b8fd0af1
-# ╠═10156f3c-7e7d-11eb-0e8b-83315a983280
+# ╠═772eba2e-8059-11eb-13d8-55ae56dd0534
+# ╟─407e6992-7e84-11eb-148e-23f00a55f412
+# ╠═88d858ac-8059-11eb-3266-39be4ddbea99
+# ╠═8d09587c-8059-11eb-3d8b-1502b8fd0af1
+# ╟─10156f3c-7e7d-11eb-0e8b-83315a983280
 # ╟─15eb7c28-7e7d-11eb-331b-c16c9a1cfb34
 # ╟─e38ef14e-7e73-11eb-06a5-edd0f493edc2
 # ╟─a6ba406e-7e73-11eb-30ef-5bcccea7fd72
 # ╟─768fd7b6-7e73-11eb-1826-d300c0ac0361
-# ╟─ae8aed3c-7e72-11eb-2004-3f41ad407fdd
+# ╠═ae8aed3c-7e72-11eb-2004-3f41ad407fdd
+# ╟─e2d46682-8286-11eb-1afc-cf239fa0a413
 # ╟─08287ce0-7e7a-11eb-159d-cb96c850b4f9
 # ╟─48185b78-7e76-11eb-3755-e75f9d869a32
 # ╟─66a5ad8a-7e7d-11eb-183b-3fd274a92798
 # ╟─4db92e1e-7e73-11eb-1f5b-31c82d374367
+# ╠═d93054fc-8285-11eb-31cb-3d10d4e42129
 # ╟─b755dcae-8059-11eb-0492-e11a2cf13d38
 # ╟─cf4b7292-8059-11eb-041f-b36239267c09
-# ╠═decc4fca-8059-11eb-3971-ab4d83398599
 # ╟─6ed4d0f2-7e74-11eb-3ab4-cf6b6f9f9165
 # ╟─23479290-8055-11eb-3f25-7701cd558e3f
 # ╟─41241d02-7e74-11eb-083c-1b00e60e3985
+# ╟─015a2444-8286-11eb-09c1-033d3126a2f7
