@@ -31,7 +31,7 @@ begin
 end
 
 # ╔═╡ 478229d4-7e72-11eb-27ec-47e443620d4c
-md"## Locate Lycian texts"
+md"## Plot Lycian sites"
 
 # ╔═╡ 7d8cbce0-82a7-11eb-0a34-e30af2350db2
 md"""Select a text to see its location on the map.
