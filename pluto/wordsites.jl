@@ -20,6 +20,7 @@ begin
 	Pkg.instantiate()
 	using PlutoUI
 	using CSV, DataFrames, Query
+	using VegaLite, VegaDatasets, JSON
 	using CitableText
 	using Lycian
 end
@@ -40,6 +41,18 @@ md"**Text in transcription**: $(@bind src TextField())"
 
 # ╔═╡ 8be7db68-8308-11eb-06df-bd24be3d137a
 md"**Shortest autocompletion**:"
+
+# ╔═╡ 058ef6ca-833f-11eb-1c38-a3fbe167d35d
+md"**Plot map now** $(@bind plotnow CheckBox())"
+
+# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
+
+
+# ╔═╡ 6506b238-833e-11eb-2810-55e052197f62
+
+
+# ╔═╡ 4b94f1b2-833d-11eb-0e42-cd716a86961a
+#plotall()
 
 # ╔═╡ dcb6078a-8306-11eb-2198-4944a386e780
 css  = html"""
@@ -63,6 +76,17 @@ md"Where we're working in the local file system:"
 
 # ╔═╡ 25f9294a-8334-11eb-10f0-578b53e5adf7
 repo = dirname(pwd())
+
+# ╔═╡ dd050a20-833c-11eb-1cde-9333e9ad1124
+# Clip to Aegean region of Mike Bostock's global 10-m resolution land data set
+land10mfile = repo * "/data/aegean10m_tj.json"
+
+# ╔═╡ 7264e112-833d-11eb-0014-7beaf57bbade
+# For plotting with VegaLite, we need to convert TopoJson to a VegaDataset
+vldata = begin
+	land10m = JSON.parsefile(land10mfile)
+	VegaDatasets.VegaJSONDataset(land10m,land10mfile)
+end
 
 # ╔═╡ 997137aa-8339-11eb-1274-f1bff8b96b7c
 md"""We work from:
@@ -140,25 +164,88 @@ end
 
 # ╔═╡ a45446fc-8335-11eb-00b7-476e6c6f8e85
 tokenrecords = begin
-	if src in wordlist
+	if plotnow
+		if src in wordlist
 		tokensites =  @from t in tokengeo begin
                    @where t.token == src
                    @select {t.lon, t.lat, t.TLname, t.token, t.text}
 				@collect
               end;
 		tokensites
-		#=
-		Markdown.parse("""
-		*$(src)* appears in corpus $(length(rslts)) time(s).
-		""")
-		=#
+
+	else
+		md""
+	end
 	else
 		md""
 	end
 end
 
-# ╔═╡ b4673314-833b-11eb-1793-474c319bbcc4
-tokenrecords[1].lon
+# ╔═╡ 11359256-833d-11eb-2eef-41841b8f4dcd
+function plotall()
+	proj = :naturalEarth1
+	scalefactor = 32000
+	h=700
+	w=900
+	rot1 = -29.6
+	rot2 = -36.6
+	rot3 = 0
+    @vlplot(width=w, height=h) +
+	
+    @vlplot(
+        projection={
+			type=proj,
+			rotate=[rot1,rot2,rot3],
+			scale=scalefactor
+		},
+        mark={
+            :geoshape,
+            fill=:lightgray,
+            stroke=:white
+        },
+        data={
+            values=vldata,
+            format={
+                type=:topojson,
+                feature=:aegean10m
+            }
+        }
+    ) +
+	@vlplot(
+		 :circle,
+		 projection={
+			type=proj,
+			rotate=[rot1,rot2,rot3],
+			scale=scalefactor
+		},
+		data=tokenrecords,
+    	longitude="lon:q",
+    	latitude="lat:q",
+	    size={value=20},
+    	color={value=:steelblue} 
+    )   +
+    @vlplot(
+        mark={
+            type=:text,
+            dy=-10,
+            color=:steelblue
+        },
+        projection={
+            type=proj,
+            rotate=[rot1,rot2,rot3],
+            scale=scalefactor
+        },
+        data=tokenrecords,
+        longitude="lon:q",
+        latitude="lat:q",
+				size={value=18},
+        text={
+            field=:TLname,
+            type=:nominal
+        }
+    )
+end
+	
 
 # ╔═╡ Cell order:
 # ╟─2d3cebbc-8303-11eb-099f-677367053aa6
@@ -166,10 +253,14 @@ tokenrecords[1].lon
 # ╟─0775cac6-8304-11eb-22b9-d7dd833c1c6e
 # ╟─8be7db68-8308-11eb-06df-bd24be3d137a
 # ╟─4f547796-8306-11eb-137b-d7ae4e391a83
-# ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
-# ╠═b4673314-833b-11eb-1793-474c319bbcc4
+# ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
+# ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
+# ╠═a45446fc-8335-11eb-00b7-476e6c6f8e85
+# ╟─6506b238-833e-11eb-2810-55e052197f62
+# ╠═4b94f1b2-833d-11eb-0e42-cd716a86961a
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
+# ╟─11359256-833d-11eb-2eef-41841b8f4dcd
 # ╠═57d90af2-8339-11eb-24ab-4382be68a01e
 # ╟─afb44b3c-8335-11eb-2124-4d00d6ae9793
 # ╟─022c7586-8336-11eb-3182-91dfdc25d7c8
@@ -177,6 +268,8 @@ tokenrecords[1].lon
 # ╟─66cfd638-8336-11eb-1040-adf56f5c91f1
 # ╟─cc9eced0-8339-11eb-0ec1-f5d5fb6226a7
 # ╟─25f9294a-8334-11eb-10f0-578b53e5adf7
+# ╟─7264e112-833d-11eb-0014-7beaf57bbade
+# ╟─dd050a20-833c-11eb-1cde-9333e9ad1124
 # ╟─997137aa-8339-11eb-1274-f1bff8b96b7c
 # ╟─0592bdde-832e-11eb-23f7-29496e63fbe7
 # ╟─fac6fcdc-8335-11eb-350f-a58a7dcf19c6
