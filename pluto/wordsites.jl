@@ -77,6 +77,7 @@ md"""
 """
 
 # ╔═╡ e1978ad6-835f-11eb-1ae9-cb6c7781597e
+# Format autocompletion for current entry in `src` text box
 function autoformat(ascii)
 	completion = replace(ascii, src => "")
 	asciihtml = "<i>ascii</i>: <b>$(src)</b><span class='gray'>$(completion)</span>"
@@ -87,7 +88,8 @@ function autoformat(ascii)
 end
 
 # ╔═╡ de896f42-835c-11eb-0171-cf358a9cfd98
-function linkurn(u)
+# Format link to Dane's edition
+function linkurn(u, sname)
 	baseurl = "https://descot21.github.io/Lycian/Texts/" # tl_NUM
 		workparts = workcomponent(u) |> CitableText.parts
 		pageid = join([workparts[1], workparts[2]], "_")
@@ -98,7 +100,7 @@ function linkurn(u)
 		else
 			label = string("Neumann, *Neufunder lykischer Inschriften* ", workparts[2])
 		end
-		"1. [$(label)]($(url))"
+		"1. [$(label)]($(url)) ($sname)"
 end
 
 # ╔═╡ 66cfd638-8336-11eb-1040-adf56f5c91f1
@@ -236,7 +238,7 @@ linklist = begin
 	
 		for r in tokenrecords
 			u = CtsUrn(r.text)
-			push!(items, linkurn(u))
+			push!(items, linkurn(u, r.TLname))
 		end
 	end
 	unique(items)
@@ -365,8 +367,8 @@ end
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
 # ╟─e1978ad6-835f-11eb-1ae9-cb6c7781597e
-# ╟─73456dd0-835c-11eb-06a7-a19d28a56ec3
 # ╟─de896f42-835c-11eb-0171-cf358a9cfd98
+# ╟─73456dd0-835c-11eb-06a7-a19d28a56ec3
 # ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
 # ╟─5c2e85de-835d-11eb-25ea-a783e99997b6
 # ╟─11359256-833d-11eb-2eef-41841b8f4dcd
