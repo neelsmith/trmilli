@@ -27,8 +27,9 @@ end
 
 # ╔═╡ cfcf046c-8302-11eb-00ef-919718cd7e73
 md"""
-### Sites where words appear
+### Geography of Lycian language
 
+Use this notebook to explore the geographic spread of preserved tokens in Dane Scott's [corpus of Lycian texts](https://descot21.github.io/Lycian/).  Unsure where to start?  Browse the [full concordance](https://descot21.github.io/Lycian/Concordance/) on Dane's site.
 
 > - Enter text in the `trmilli` project's ASCII-based transcription.
 > - When you have entered *a complete token*, check `Plot map now`
@@ -199,7 +200,7 @@ begin
 				push!(completionitems, autoformat(tkn))
 			end
 			HTML(
-				string("<ul>", join(completionitems, "\n"), "</ul>")
+				string("<ul>", join(unique(completionitems), "\n"), "</ul>")
 			)
 			
 		end
