@@ -75,6 +75,16 @@ md"""
 > Data reformatted for notebook manipulation.
 """
 
+# ╔═╡ e1978ad6-835f-11eb-1ae9-cb6c7781597e
+function autoformat(ascii)
+	completion = replace(ascii, src => "")
+	asciihtml = "<i>ascii</i>: <b>$(src)</b><span class='gray'>$(completion)</span>"
+	lycstart = src |> Lycian.ucode	
+	lyccomplete = completion |> Lycian.ucode
+	lyc = "<i>unicode</i>: <b>$(lycstart)</b><span class='gray'>$(lyccomplete)</span>"
+	string("<li>", asciihtml, " ", lyc, "</li>")
+end
+
 # ╔═╡ de896f42-835c-11eb-0171-cf358a9cfd98
 function linkurn(u)
 	baseurl = "https://descot21.github.io/Lycian/Texts/" # tl_NUM
@@ -172,14 +182,25 @@ begin
 		if isempty(matches)
 			HTML("<span class='gray'>(no matches)</span>")
 		else 
+			
+			
+			#=
 			ascii = matches[1]
 			completion = replace(ascii, src => "")
 			asciihtml = "<i>ascii</i>: <b>$(src)</b><span class='gray'>$(completion)</span>"
 			
-			lyccomplete = replace(completion, "-" => "") |> Lycian.ucode
-			lycstart = Lycian.ucode(ascii)
+			#lyccomplete = replace(completion, "-" => "") |> Lycian.ucode
+			lyccomplete = completion |> Lycian.ucode
+			lycstart = src |> Lycian.ucode
 			lyc = "<i>unicode</i>: <b>$(lycstart)</b><span class='gray'>$(lyccomplete)</span>"
-			HTML("<p>$(asciihtml)</p><p>$lyc</p>")
+			=#
+			completionitems = []
+			for tkn in matches
+				push!(completionitems, autoformat(tkn))
+			end
+			HTML(
+				string("<ul>", join(completionitems, "\n"), "</ul>")
+			)
 			
 		end
 		
@@ -342,6 +363,7 @@ end
 # ╟─6506b238-833e-11eb-2810-55e052197f62
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
+# ╟─e1978ad6-835f-11eb-1ae9-cb6c7781597e
 # ╟─73456dd0-835c-11eb-06a7-a19d28a56ec3
 # ╟─de896f42-835c-11eb-0171-cf358a9cfd98
 # ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
