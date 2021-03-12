@@ -55,6 +55,13 @@ else
 	md"Check `Plot map now` to display a map with geography of your selected token."
 end
 
+# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
+if plotnow && (length(tokenrecords) > 0))
+	plotall()
+else
+	md""
+end
+
 # ╔═╡ 6506b238-833e-11eb-2810-55e052197f62
 
 
@@ -69,6 +76,9 @@ css  = html"""
 
 # ╔═╡ ca6799c0-8308-11eb-10f3-73c346876720
 md"""
+
+---
+
 > Data reformatted for notebook manipulation.
 """
 
@@ -80,6 +90,9 @@ md"Where we're working in the local file system:"
 
 # ╔═╡ 25f9294a-8334-11eb-10f0-578b53e5adf7
 repo = dirname(pwd())
+
+# ╔═╡ eb038580-8342-11eb-2ac2-e199eb9cd846
+md"Map background loaded from TopoJson data"
 
 # ╔═╡ dd050a20-833c-11eb-1cde-9333e9ad1124
 # Clip to Aegean region of Mike Bostock's global 10-m resolution land data set
@@ -261,13 +274,6 @@ function plotall()
 end
 	
 
-# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
-if plotnow
-	plotall()
-else
-	md""
-end
-
 # ╔═╡ Cell order:
 # ╟─2d3cebbc-8303-11eb-099f-677367053aa6
 # ╟─cfcf046c-8302-11eb-00ef-919718cd7e73
@@ -277,19 +283,20 @@ end
 # ╟─d7a5b7ce-8340-11eb-1d4c-b3badea67027
 # ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
 # ╟─5f416700-8341-11eb-0b3b-5ba0357ca6a6
-# ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
+# ╠═07e701ce-833f-11eb-1b5a-d912e1b0e36c
 # ╟─6506b238-833e-11eb-2810-55e052197f62
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
 # ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
 # ╟─11359256-833d-11eb-2eef-41841b8f4dcd
-# ╠═57d90af2-8339-11eb-24ab-4382be68a01e
+# ╟─57d90af2-8339-11eb-24ab-4382be68a01e
 # ╟─afb44b3c-8335-11eb-2124-4d00d6ae9793
 # ╟─022c7586-8336-11eb-3182-91dfdc25d7c8
 # ╟─127be16a-8338-11eb-1a32-67adc32a8a59
 # ╟─66cfd638-8336-11eb-1040-adf56f5c91f1
 # ╟─cc9eced0-8339-11eb-0ec1-f5d5fb6226a7
 # ╟─25f9294a-8334-11eb-10f0-578b53e5adf7
+# ╟─eb038580-8342-11eb-2ac2-e199eb9cd846
 # ╟─7264e112-833d-11eb-0014-7beaf57bbade
 # ╟─dd050a20-833c-11eb-1cde-9333e9ad1124
 # ╟─997137aa-8339-11eb-1274-f1bff8b96b7c
