@@ -173,7 +173,7 @@ wordlist = tokengeo[:, :token]
 
 # ╔═╡ 4f547796-8306-11eb-137b-d7ae4e391a83
 begin
-	if isempty(src)
+	if length(src) < 2
 		md""
 
 		
