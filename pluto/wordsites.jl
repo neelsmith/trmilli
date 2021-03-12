@@ -55,13 +55,6 @@ else
 	md"Check `Plot map now` to display a map with geography of your selected token."
 end
 
-# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
-if plotnow && (length(tokenrecords) > 0))
-	plotall()
-else
-	md""
-end
-
 # ╔═╡ 6506b238-833e-11eb-2810-55e052197f62
 
 
@@ -199,11 +192,13 @@ tokenrecords = begin
 end
 
 # ╔═╡ 5f416700-8341-11eb-0b3b-5ba0357ca6a6
-if plotnow
-	md"""
-	*$(src)* found in **$(length(tokenrecords)) texts**.
-	"""
-
+if plotnow 
+	if isempty(tokenrecords)
+		md"\"*$(src)*\" is not a valid token."
+	else
+	
+		md"*$(src)* found in **$(length(tokenrecords)) texts**."
+	end
 else
 	md""
 end
@@ -274,6 +269,13 @@ function plotall()
 end
 	
 
+# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
+if plotnow && (length(tokenrecords) > 0)
+	plotall()
+else
+	md""
+end
+
 # ╔═╡ Cell order:
 # ╟─2d3cebbc-8303-11eb-099f-677367053aa6
 # ╟─cfcf046c-8302-11eb-00ef-919718cd7e73
@@ -283,7 +285,7 @@ end
 # ╟─d7a5b7ce-8340-11eb-1d4c-b3badea67027
 # ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
 # ╟─5f416700-8341-11eb-0b3b-5ba0357ca6a6
-# ╠═07e701ce-833f-11eb-1b5a-d912e1b0e36c
+# ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
 # ╟─6506b238-833e-11eb-2810-55e052197f62
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
