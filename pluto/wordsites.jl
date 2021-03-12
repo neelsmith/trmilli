@@ -75,6 +75,21 @@ md"""
 > Data reformatted for notebook manipulation.
 """
 
+# ╔═╡ de896f42-835c-11eb-0171-cf358a9cfd98
+function linkurn(u)
+	baseurl = "https://descot21.github.io/Lycian/Texts/" # tl_NUM
+		workparts = workcomponent(u) |> CitableText.parts
+		pageid = join([workparts[1], workparts[2]], "_")
+		url = baseurl * pageid
+		label = ""
+		if (workparts[1] == "tl")
+			label = string("*Tituli Lycii* ", workparts[2])
+		else
+			label = string("Neumann, *Neufunder lykischer Inschriften* ", workparts[2])
+		end
+		"1. [$(label)]($(url))"
+end
+
 # ╔═╡ 66cfd638-8336-11eb-1040-adf56f5c91f1
 md">Raw data sets"
 
@@ -191,13 +206,50 @@ tokenrecords = begin
 	end
 end
 
+# ╔═╡ 73456dd0-835c-11eb-06a7-a19d28a56ec3
+linklist = begin
+	items = []
+	if isempty(tokenrecords)
+	else
+	
+		for r in tokenrecords
+			u = CtsUrn(r.text)
+			push!(items, linkurn(u))
+		end
+	end
+	unique(items)
+end
+
+# ╔═╡ 4fdf06ce-835e-11eb-3ed8-1f4e3e64233c
+if isempty(linklist)
+	md""
+else 
+Markdown.parse(
+	join(linklist, "\n")
+	)
+end
+
+# ╔═╡ 5c2e85de-835d-11eb-25ea-a783e99997b6
+matchedsites =  if isempty(tokenrecords)
+		md"empty"
+	else
+	
+	sitesmatched = []
+	for r in tokenrecords
+		push!(sitesmatched, r.TLname)
+	end
+	unique(sitesmatched)
+end
+
 # ╔═╡ 5f416700-8341-11eb-0b3b-5ba0357ca6a6
 if plotnow 
 	if isempty(tokenrecords)
 		md"\"*$(src)*\" is not a valid token."
 	else
 	
-		md"*$(src)* found in **$(length(tokenrecords)) texts**."
+		md"""
+**Summary of results**:   *$(src)* found in **$(length(tokenrecords)) passage(s)** in **$(length(linklist)) text(s)** from **$(length(matchedsites)) site(s)**.
+		"""
 	end
 else
 	md""
@@ -285,11 +337,15 @@ end
 # ╟─d7a5b7ce-8340-11eb-1d4c-b3badea67027
 # ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
 # ╟─5f416700-8341-11eb-0b3b-5ba0357ca6a6
+# ╟─4fdf06ce-835e-11eb-3ed8-1f4e3e64233c
 # ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
 # ╟─6506b238-833e-11eb-2810-55e052197f62
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
+# ╟─73456dd0-835c-11eb-06a7-a19d28a56ec3
+# ╟─de896f42-835c-11eb-0171-cf358a9cfd98
 # ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
+# ╟─5c2e85de-835d-11eb-25ea-a783e99997b6
 # ╟─11359256-833d-11eb-2eef-41841b8f4dcd
 # ╟─57d90af2-8339-11eb-24ab-4382be68a01e
 # ╟─afb44b3c-8335-11eb-2124-4d00d6ae9793
