@@ -30,9 +30,12 @@ md"""
 ### Sites where words appear
 
 
-Enter text in the `trmilli` project's ASCII-based transcription.
+> - Enter text in the `trmilli` project's ASCII-based transcription.
+> - When you have entered *a complete token*, check `Plot map now`
+>
+> To prevent the notebook from trying to construct a complex map every time
+> you type a letter, uncheck `Plot map now` while you're entering text.
 
-The box below will display the shortest matching token in the `trmilli` corpus.
 
 """
 
@@ -45,14 +48,15 @@ md"**Shortest autocompletion**:"
 # ╔═╡ 058ef6ca-833f-11eb-1c38-a3fbe167d35d
 md"**Plot map now** $(@bind plotnow CheckBox())"
 
-# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
-
+# ╔═╡ d7a5b7ce-8340-11eb-1d4c-b3badea67027
+if plotnow
+	md""
+else
+	md"Check `Plot map now` to display a map with geography of your selected token."
+end
 
 # ╔═╡ 6506b238-833e-11eb-2810-55e052197f62
 
-
-# ╔═╡ 4b94f1b2-833d-11eb-0e42-cd716a86961a
-#plotall()
 
 # ╔═╡ dcb6078a-8306-11eb-2198-4944a386e780
 css  = html"""
@@ -165,13 +169,13 @@ end
 # ╔═╡ a45446fc-8335-11eb-00b7-476e6c6f8e85
 tokenrecords = begin
 	if plotnow
-		if src in wordlist
-		tokensites =  @from t in tokengeo begin
-                   @where t.token == src
-                   @select {t.lon, t.lat, t.TLname, t.token, t.text}
-				@collect
-              end;
-		tokensites
+	if src in wordlist
+	tokensites =  @from t in tokengeo begin
+			   @where t.token == src
+			   @select {t.lon, t.lat, t.TLname, t.token, t.text}
+			@collect
+		  end;
+	tokensites
 
 	else
 		md""
@@ -179,6 +183,16 @@ tokenrecords = begin
 	else
 		md""
 	end
+end
+
+# ╔═╡ 5f416700-8341-11eb-0b3b-5ba0357ca6a6
+if plotnow
+	md"""
+	*$(src)* found in **$(length(tokenrecords)) texts**.
+	"""
+
+else
+	md""
 end
 
 # ╔═╡ 11359256-833d-11eb-2eef-41841b8f4dcd
@@ -247,19 +261,27 @@ function plotall()
 end
 	
 
+# ╔═╡ 07e701ce-833f-11eb-1b5a-d912e1b0e36c
+if plotnow
+	plotall()
+else
+	md""
+end
+
 # ╔═╡ Cell order:
 # ╟─2d3cebbc-8303-11eb-099f-677367053aa6
 # ╟─cfcf046c-8302-11eb-00ef-919718cd7e73
 # ╟─0775cac6-8304-11eb-22b9-d7dd833c1c6e
 # ╟─8be7db68-8308-11eb-06df-bd24be3d137a
 # ╟─4f547796-8306-11eb-137b-d7ae4e391a83
+# ╟─d7a5b7ce-8340-11eb-1d4c-b3badea67027
 # ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
+# ╟─5f416700-8341-11eb-0b3b-5ba0357ca6a6
 # ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
-# ╠═a45446fc-8335-11eb-00b7-476e6c6f8e85
 # ╟─6506b238-833e-11eb-2810-55e052197f62
-# ╠═4b94f1b2-833d-11eb-0e42-cd716a86961a
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
+# ╟─a45446fc-8335-11eb-00b7-476e6c6f8e85
 # ╟─11359256-833d-11eb-2eef-41841b8f4dcd
 # ╠═57d90af2-8339-11eb-24ab-4382be68a01e
 # ╟─afb44b3c-8335-11eb-2124-4d00d6ae9793
