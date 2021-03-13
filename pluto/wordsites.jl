@@ -44,7 +44,7 @@ Use this notebook to explore the geographic spread of preserved tokens in Dane S
 md"**Text in transcription**: $(@bind src TextField())"
 
 # ╔═╡ 8be7db68-8308-11eb-06df-bd24be3d137a
-md"**Shortest autocompletion**:"
+md"**Autocompletion**:"
 
 # ╔═╡ 058ef6ca-833f-11eb-1c38-a3fbe167d35d
 md"**Plot map now** $(@bind plotnow CheckBox())"
