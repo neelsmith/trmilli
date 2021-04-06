@@ -12,5 +12,5 @@ The `pluto` directory includes Pluto notebooks you can run locally to use the da
 In addition, you can run some of them on `mybinder.org` using only a web browser:
 
 
-- type Lycian Unicode](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Ftranscoder.jl) 
+- [type Lycian Unicode](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Ftranscoder.jl) 
 - expore the [geography of words](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Fwordsites.jl) in Dane Scott's corpus of Lycian texts
