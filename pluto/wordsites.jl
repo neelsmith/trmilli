@@ -1,5 +1,5 @@
 ### A Pluto.jl notebook ###
-# v0.12.21
+# v0.14.0
 
 using Markdown
 using InteractiveUtils
@@ -19,6 +19,7 @@ begin
 	Pkg.activate(".")
 	Pkg.instantiate()
 	using PlutoUI
+	using Downloads
 	using CSV, DataFrames, Query
 	using VegaLite, VegaDatasets, JSON
 	using CitableText
@@ -106,28 +107,20 @@ end
 # ╔═╡ 66cfd638-8336-11eb-1040-adf56f5c91f1
 md">Raw data sets"
 
-# ╔═╡ cc9eced0-8339-11eb-0ec1-f5d5fb6226a7
-md"Where we're working in the local file system:"
-
-# ╔═╡ 25f9294a-8334-11eb-10f0-578b53e5adf7
-repo = dirname(pwd())
-
 # ╔═╡ eb038580-8342-11eb-2ac2-e199eb9cd846
 md"Map background loaded from TopoJson data"
-
-# ╔═╡ dd050a20-833c-11eb-1cde-9333e9ad1124
-# Clip to Aegean region of Mike Bostock's global 10-m resolution land data set
-land10mfile = repo * "/data/aegean10m_tj.json"
 
 # ╔═╡ 7264e112-833d-11eb-0014-7beaf57bbade
 # For plotting with VegaLite, we need to convert TopoJson to a VegaDataset
 vldata = begin
+	land10murl = "https://raw.githubusercontent.com/neelsmith/trmilli/master/data/aegean10m_tj.json"
+	land10mfile = Downloads.download(land10murl)
 	land10m = JSON.parsefile(land10mfile)
 	VegaDatasets.VegaJSONDataset(land10m,land10mfile)
 end
 
 # ╔═╡ 997137aa-8339-11eb-1274-f1bff8b96b7c
-md"""We work from:
+md"""Trmilli data we need:
 
 - a concordance of tokens to text passage
 - an association of texts with geographic identifiers
@@ -135,8 +128,11 @@ md"""We work from:
 """
 
 # ╔═╡ 0592bdde-832e-11eb-23f7-29496e63fbe7
-concordance = CSV.File(repo * "/data/concordance.cex", skipto
-=2, delim="|") |> DataFrame
+concordance = begin
+	concordanceurl = "https://raw.githubusercontent.com/neelsmith/trmilli/master/data/concordance.cex"
+	concordancefile = Downloads.download(concordanceurl)	
+	CSV.File(concordancefile, skipto=2, delim="|") |> DataFrame
+end
 
 # ╔═╡ 127be16a-8338-11eb-1a32-67adc32a8a59
 # Simplify text URNs by dropping version and passage
@@ -155,15 +151,20 @@ end
 
 # ╔═╡ fac6fcdc-8335-11eb-350f-a58a7dcf19c6
 textgeo = begin
-	onlinetexts = CSV.File(repo * "/data/onlinegeo.cex", skipto
+	onlineurl = "https://raw.githubusercontent.com/neelsmith/trmilli/master/data/onlinegeo.cex"
+	onlinefile = Downloads.download(onlineurl)
+	onlinetexts = CSV.File(onlinefile, skipto
 =2, delim="|") |> DataFrame
 	onlinetexts |> dropmissing
 end
 
 # ╔═╡ 494cd872-8336-11eb-0316-b5e86ebbbe6f
 # Lon-lat coordiantes for sites identified by RAGE ID.
-lls = CSV.File(repo * "/data/simple-lls.cex", skipto
-=2, delim="|") |> DataFrame
+lls = begin
+	llsurl = "https://raw.githubusercontent.com/neelsmith/trmilli/master/data/simple-lls.cex"
+	llsfile = Downloads.download(llsurl)
+	CSV.File(llsfile, skipto=2, delim="|") |> DataFrame
+end
 
 # ╔═╡ 022c7586-8336-11eb-3182-91dfdc25d7c8
 ragetext = innerjoin(lls, textgeo, on = :rageid)
@@ -362,8 +363,8 @@ end
 # ╟─058ef6ca-833f-11eb-1c38-a3fbe167d35d
 # ╟─5f416700-8341-11eb-0b3b-5ba0357ca6a6
 # ╟─4fdf06ce-835e-11eb-3ed8-1f4e3e64233c
-# ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
 # ╟─6506b238-833e-11eb-2810-55e052197f62
+# ╟─07e701ce-833f-11eb-1b5a-d912e1b0e36c
 # ╟─dcb6078a-8306-11eb-2198-4944a386e780
 # ╟─ca6799c0-8308-11eb-10f3-73c346876720
 # ╟─e1978ad6-835f-11eb-1ae9-cb6c7781597e
@@ -377,11 +378,8 @@ end
 # ╟─022c7586-8336-11eb-3182-91dfdc25d7c8
 # ╟─127be16a-8338-11eb-1a32-67adc32a8a59
 # ╟─66cfd638-8336-11eb-1040-adf56f5c91f1
-# ╟─cc9eced0-8339-11eb-0ec1-f5d5fb6226a7
-# ╟─25f9294a-8334-11eb-10f0-578b53e5adf7
 # ╟─eb038580-8342-11eb-2ac2-e199eb9cd846
 # ╟─7264e112-833d-11eb-0014-7beaf57bbade
-# ╟─dd050a20-833c-11eb-1cde-9333e9ad1124
 # ╟─997137aa-8339-11eb-1274-f1bff8b96b7c
 # ╟─0592bdde-832e-11eb-23f7-29496e63fbe7
 # ╟─fac6fcdc-8335-11eb-350f-a58a7dcf19c6
