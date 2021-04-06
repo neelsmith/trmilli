@@ -16,8 +16,19 @@ end
 # ╔═╡ 2d3cebbc-8303-11eb-099f-677367053aa6
 begin
 	using Pkg
-	Pkg.activate(".")
-	Pkg.instantiate()
+	# For use on mybinder.org, we build *everything* from scratch:
+	#Pkg.activate(".")
+	#Pkg.instantiate()
+	Pkg.add("PlutoUI")
+	Pkg.add("Downloads")
+	Pkg.add("CSV")
+	Pkg.add("DataFrames")
+	Pkg.add("Query")
+	Pkg.add("VegaLite")
+	Pkg.add("VegaDatasets")
+	Pkg.add("JSON")
+	Pkg.add("CitableText")
+	Pkg.add("Lycian")
 	using PlutoUI
 	using Downloads
 	using CSV, DataFrames, Query
