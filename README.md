@@ -9,4 +9,8 @@ Original editions of Lycian inscriptions are drawn from Dane Scott's coordinated
 
 The `pluto` directory includes Pluto notebooks you can run locally to use the data in this repository.  
 
-In addition, you can run a Pluto notebook supporting typing Lycian Unicode either locally or [on `binder.org`](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Ftranscoder.jl) 
+In addition, you can run some of them on `mybinder.org` using only a web browser:
+
+
+- type Lycian Unicode](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Ftranscoder.jl) 
+- expore the [geography of words](https://binder.plutojl.org/open?url=https%253A%252F%252Fraw.githubusercontent.com%252Fneelsmith%252Ftrmilli%252Fmaster%252Fpluto%252Fwordsites.jl) in Dane Scott's corpus of Lycian texts
